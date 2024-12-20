@@ -269,8 +269,8 @@
     }
   }
 
-  $: setSource($player && $playingEpisode.enclosureUrl);
-  $: setSrcTimes($player && $playingEpisode.enclosureUr);
+  $: setSource($player && $playingEpisode?.enclosureUrl);
+  $: setSrcTimes($player && $playingEpisode?.enclosureUrl);
 </script>
 
 <div class="container">

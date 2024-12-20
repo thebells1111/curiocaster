@@ -74,7 +74,7 @@
   let previousSplit;
   let currentBlock;
 
-  $: setSource($playingEpisode.enclosureUrl);
+  $: setSource($playingEpisode?.enclosureUrl);
 
   function setSource(src) {
     $showVideo =
@@ -219,7 +219,7 @@
       if ($playingEpisode.liveStatus === "live") {
         $player.src = "";
         setTimeout(() => {
-          $player.src = $playingEpisode.enclosureUrl;
+          $player.src = $playingEpisode?.enclosureUrl;
           liveLoaded = false;
         }, 0);
       }
@@ -258,7 +258,7 @@
 
       const currentIndex = $playingList.findIndex(
         (episode) =>
-          $playingEpisode.enclosureUrl === episode.enclosureUrl &&
+          $playingEpisode.enclosureUrl === episode?.enclosureUrl &&
           $playingEpisode.datePublished === episode.datePublished
       );
 
