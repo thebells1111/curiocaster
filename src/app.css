@@ -1,0 +1,342 @@
+@import '@fontsource/fira-mono';
+@import url('https://fonts.googleapis.com/css2?family=Ruthie&display=swap');
+
+html {
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell,
+		'Helvetica Neue', sans-serif;
+	--font-mono: 'Fira Mono', monospace;
+
+	--player-color: hsl(0, 0%, 10%);
+	--dark-primary-color: hsl(0, 0%, 12.5%);
+	--primary-color: hsl(0, 0%, 100%);
+	--secondary-color: hsl(0, 0%, 20%);
+	--tertiary-color: hsl(0, 0%, 22.5%);
+
+	--primary-accent-color: rgb(32, 124, 93);
+	--secondary-accent-color-light: #4284c2;
+	--secondary-accent-color-dark: #000e5a;
+
+	--accent-color-red: rgb(124, 32, 32);
+	--accent-color-blue: rgb(66, 132, 194);
+
+	--heading-color: hsl(0, 0%, 10%);
+
+	--primary-text-color: hsl(0, 0%, 10%);
+	--secondary-text-color: hsl(0, 0%, 15%);
+	--tertiary-text-color: hsl(0, 0%, 80%);
+
+	--icon-color: rgb(220, 220, 220);
+
+	--border-color: hsl(0, 0%, 40%);
+
+	--selected-primary-color: hsl(0, 0%, 85%);
+	--selected-secondary-color: hsl(0, 0%, 90%);
+
+	--hover-primary-color: hsl(0, 0%, 82.5%);
+	--hover-secondary-color: hsl(0, 0%, 87.5%);
+
+	--episode-background-color: hsl(0, 0%, 100%);
+	--episode-card-color: hsl(191, 58%, 93%);
+	--episode-card-selected: hsl(191, 58%, 85%);
+	--episode-card-hover: hsl(191, 58%, 81%);
+
+	--podcast-data-card-color: hsl(0, 0%, 5%);
+
+	--player-card-color: hsl(168, 100%, 98%);
+	--player-background-color: hsl(229, 22%, 10%);
+
+	--menu-active-color: hsl(0, 0%, 20%);
+	--menu-hover-color: hsl(0, 0%, 10%);
+	--primary-button-color-light: rgb(100, 100, 100);
+	--primary-button-color-dark: #000;
+
+	--audio-progress-tracker: hsl(0, 0%, 40%);
+	--audio-progress-handle: hsl(0, 0%, 90%);
+	--audio-progress-elapsed: hsl(0, 0%, 90%);
+
+	--column-width: 42rem;
+	--column-margin-top: 4rem;
+
+	--box-shadow: none;
+
+	--primary-button-text-color: hsl(0, 0%, 90%);
+	--primary-button-background-color: #00447c;
+	--primary-button-background-image: linear-gradient(#0186f1, #00447c);
+
+	--image-container-overlay-background-color: none;
+	/* change to 333 for light mode */
+
+	--mobile-player-background-color: hsl(0, 0%, 5%);
+	--mobile-bottom-controls-background-color: hsl(0, 0%, 15%);
+	--mobile-bottom-controls-border-color: transparent;
+
+	--dropdown-box-shadow: 0px 0px 2px 2px hsl(0, 0%, 20%);
+
+	--body-background-color: hsl(0, 0%, 5%);
+
+	--spinner-color: hsl(0, 0%, 50%);
+
+	--input-border-color: hsl(0, 0%, 90%);
+	--input-background-color: transparent;
+
+	--loading-text-color: hsl(0, 0%, 50%);
+}
+
+a {
+	color: var(--primary-accent-color);
+	font-weight: 550;
+}
+
+html[data-theme='dark'] {
+	--pure-white: #ffffff;
+	--background-color: hsl(0, 0%, 5%);
+	--player-color: hsl(0, 0%, 10%);
+
+	--dark-primary-color: hsl(207, 22%, 7.5%);
+	--primary-color: hsl(207, 22%, 10%);
+	--secondary-color: hsl(207, 22%, 15%);
+	--tertiary-color: hsl(207, 22%, 17.5%);
+	--quadary-color: hsl(207, 22%, 20%);
+
+	--selected-primary-color: hsl(207, 22%, 20%);
+	--selected-secondary-color: hsl(207, 22%, 22.5%);
+	--hover-primary-color: hsl(207, 22%, 25%);
+	--hover-secondary-color: hsl(207, 22%, 27.5%);
+
+	--episode-background-color: hsl(0, 0%, 5%);
+	--episode-card-color: hsl(207, 22%, 15%);
+	--episode-card-selected: hsl(207, 22%, 22.5%);
+	--episode-card-hover: hsl(207, 22%, 25%);
+
+	--accent-color-red: rgb(124, 32, 32);
+	--primary-accent-color: hsl(207, 59%, 31%);
+	--new-episode-color: hsla(207, 59%, 31%, 0.8);
+	--live-episode-color: hsl(0deg 100% 25% / 80%);
+	--promoted-color: hsla(0, 89%, 17%, 0.8);
+
+	--accent-color-blue: hsl(209, 51%, 51%);
+	--heading-color: hsl(0, 0%, 10%);
+	--primary-text-color: hsl(0, 0%, 90%);
+	--secondary-text-color: hsl(0, 0%, 85%);
+	--tertiary-text-color: hsl(0, 0%, 80%);
+	--icon-color: rgb(220, 220, 220);
+	--text-color-light: #ddd;
+	--background-without-opacity: rgba(255, 255, 255, 0.7);
+	--border-color: hsl(0, 0%, 40%);
+
+	--podcast-data-card-color: hsl(0, 0%, 5%);
+
+	--player-card-color: hsl(0, 0%, 5%);
+	--player-background-color: hsl(229, 22%, 10%);
+
+	--menu-active-color: #4288c2;
+	--menu-hover-color: #fff;
+	--primary-button-color-light: rgb(100, 100, 100);
+	--primary-button-color-dark: #000;
+
+	--secondary-accent-color-light: hsl(225, 22%, 25%);
+	--secondary-accent-color-dark: hsl(225, 22%, 7%);
+
+	--shownotes-color-light: hsl(207, 22%, 20%);
+	--shownotes-color-dark: hsl(207, 22%, 7%);
+
+	--audio-progress-tracker: hsl(0, 0%, 40%);
+	--audio-progress-handle: hsl(0, 0%, 90%);
+	--audio-progress-elapsed: hsl(0, 0%, 90%);
+
+	--column-width: 42rem;
+	--column-margin-top: 4rem;
+
+	--box-shadow: none;
+
+	--primary-button-text-color: hsl(0, 0%, 90%);
+
+	--primary-button-background-color: #00447c;
+	--primary-button-background-image: linear-gradient(#0186f1, #00447c);
+
+	--image-container-overlay-background-color: none;
+	/* change to 333 for light mode */
+
+	--mobile-player-background-color: hsl(0, 0%, 5%);
+	--mobile-bottom-controls-background-color-light: hsl(207, 22%, 15%);
+	--mobile-bottom-controls-background-color-dark: hsl(207, 22%, 10%);
+	--mobile-bottom-controls-border-color: transparent;
+	--mobile-bottom-border: none;
+
+	--dropdown-box-shadow: 0px 0px 2px 2px hsl(0, 0%, 20%);
+
+	--body-background-color: hsl(0, 0%, 5%);
+
+	--input-background-color: transparent;
+	--input-text-color: var(--primary-text-color);
+	--spinner-color: hsl(0, 0%, 50%);
+
+	--loading-text-color: hsl(207, 22%, 25%);
+	--loading-image-color: hsl(207, 22%, 20%);
+	--loading-image-shimmer: hsl(207, 22%, 30%);
+
+	--modal-border: 1px solid hsl(207, 22%, 18%);
+	--modal-box-shadow: 0px 0px 12px 2px hsl(207, 22%, 18%);
+}
+
+button.primary {
+	margin: 0;
+	padding: 0;
+	height: 35.78px;
+	width: 136.63px;
+	font-weight: 525;
+	color: var(--primary-button-text-color);
+	text-shadow: 0 1px #c0c0c0;
+	background: var(--primary-button-background-color);
+	background-image: var(--primary-button-background-image);
+	border-radius: 50px;
+	border: none;
+	outline: 0;
+}
+
+html[data-theme='dark'] a {
+	color: var(--accent-color-blue);
+	text-decoration: none;
+	font-weight: 550;
+}
+
+html,
+body,
+#svelte {
+	height: 100vh;
+	width: 100%;
+	font-size: initial;
+	background-color: var(--body-background-color);
+	-webkit-tap-highlight-color: transparent;
+}
+
+*,
+::after,
+::before {
+	box-sizing: border-box;
+}
+
+body {
+	height: 100vh;
+	width: 100%;
+	margin: 0;
+	background-color: var(--tertiary-color);
+	background: linear-gradient(
+		180deg,
+		var(--primary-color) 0%,
+		var(--secondary-color) 15%,
+		var(--tertiary-color) 50%,
+		var(--secondary-color) 85%,
+		var(--primary-color) 100%
+	);
+	overscroll-behavior-y: contain;
+}
+
+body::before {
+	content: '';
+	width: 100vw;
+	height: 100vh;
+	position: absolute;
+	z-index: -1;
+	background: radial-gradient(50% 50% at 50% 50%, #fff 0%, rgba(255, 255, 255, 0) 100%);
+	opacity: 0.05;
+}
+
+h1,
+h2,
+p {
+	color: var(--primary-text-color);
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+label {
+	display: block;
+	color: var(--primary-text-color);
+}
+
+input,
+button,
+select,
+textarea {
+	font-family: inherit;
+	font-size: inherit;
+	padding: 0.4em;
+	margin: 0 0 0.5em 0;
+	box-sizing: border-box;
+	border: 1px solid var(--border-color);
+	border-radius: 2px;
+	background-color: var(--input-background-color);
+	color: var(--input-text-color);
+}
+
+input:disabled {
+	color: var(--text-color-light);
+}
+
+button {
+	color: var(--primary-text-color);
+	cursor: pointer;
+	background-color: var(--primary-button-background-color);
+	outline: none;
+}
+
+button:disabled {
+	color: var(--primary-text-color);
+}
+
+button:focus {
+	border-color: var(--primary-text-color);
+}
+
+ul {
+	margin: 0;
+	padding: 0;
+}
+
+li {
+	color: var(--primary-text-color);
+}
+
+::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: var(--episode-card-selected);
+	border-radius: 10px;
+}
+
+ul,
+div {
+	scrollbar-color: var(--episode-card-selected) transparent;
+	scrollbar-width: thin;
+}
+
+#confetti-canvas {
+	z-index: 1000;
+}
+
+input,
+textarea,
+button,
+select,
+a {
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+button.fancy {
+	background-color: var(--primary-button-background-color);
+	margin: 0;
+	padding: 2px 8px;
+	margin: 0;
+	color: var(--primary-text-color);
+	border-radius: 50px;
+	outline: 0;
+	border: none;
+	text-shadow: 1px 4px 6px rgb(82, 82, 82), 0 0 0 #000, 1px 4px 6px rgb(82, 82, 82);
+}

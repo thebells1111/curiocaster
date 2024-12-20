@@ -1,0 +1,110 @@
+<rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/"
+  xmlns:podcast="https://github.com/Podcastindex-org/podcast-namespace/blob/main/docs/1.0.md"
+  version="2.0">
+  <channel>
+    <title>CurioCaster</title>
+    <description>Podcast episodes to demonstrate the features and functions of CurioCaster</description>
+    <itunes:image href="https://curiocaster.com/CurioLogo512.png" />
+    <link />
+    <generator>Sovereign Feeds</generator>
+    <image>
+      <url>https://curiocaster.com/CurioLogo512.png</url>
+      <title>CurioCaster</title>
+      <description>Podcast episodes to demonstrate the features and functions of CurioCaster</description>
+      <width>144</width>
+      <height>144</height>
+    </image>
+    <podcast:medium>podcast</podcast:medium>
+    <podcast:images srcset="https://curiocaster.com/CurioLogo512.png 512w" />
+    <itunes:owner>
+      <itunes:email>curiocaster@gmail.com</itunes:email>
+      <itunes:name>Steven Bell</itunes:name>
+    </itunes:owner>
+    <pubDate>Wed, 17 May 2023 18:42:07 +0000</pubDate>
+    <lastBuildDate>Wed, 17 May 2023 18:42:07 +0000</lastBuildDate>
+    <podcast:location geo="geo:33.51601,-86.81455" osm="R6930627">Birmingham Civil Rights Museum</podcast:location>
+    <podcast:guid>58183156-a6ae-5e36-8875-a1be2ab691bd</podcast:guid>
+    <podcast:value type="lightning" method="keysend" suggested="0.00000005000">
+      https://curiohoster.com/event?event_id=b1ddabe6-cb0d-4906-a25e-c3bc4afb0ba9https://curiohoster.com/event?event_id=b1ddabe6-cb0d-4906-a25e-c3bc4afb0ba9
+      <podcast:valueRecipient
+        name="steven@getalby.com" type="node"
+        address="030a58b8653d32b99200a2334cfe913e51dc7d155aa0116c176657a4f1722677a3"
+        customKey="696969" customValue="eChoVKtO1KujpAA5HCoB" split="50" />
+        <podcast:valueRecipient
+        name="The Split Kit" type="node"
+        address="030a58b8653d32b99200a2334cfe913e51dc7d155aa0116c176657a4f1722677a3"
+        customKey="696969" customValue="boPNspwDdt7axih5DfKs" split="50" />
+    </podcast:value>
+    <itunes:category />
+    <podcast:complete>no</podcast:complete>
+    <podcast:block>no</podcast:block>
+    <podcast:liveItem status="live" start="2023-05-30T18:40:00.000Z"
+      chat="https://kiwiirc.com/nextclient/irc.zeronode.net/#CurioCaster"
+      end="2023-05-30T18:40:00.000Z">
+      <podcast:liveValue uri="https://curiohoster.com/event?event_id=test" protocol="socket.io" />
+      <title>CurioCaster Live Value Test Episode</title>
+      <description><![CDATA[<p>This is a test episode to develop live remote value splits. Go Podcasting!!!</p>]]></description>
+      <enclosure length="33" type="audio/mpeg" url="https://listen.noagendastream.com/noagenda" />
+      <guid isPermaLink="false">LiveStream1</guid>
+      <itunes:subtitle>CurioCaster Live Value Test Episode</itunes:subtitle>
+      <itunes:summary><![CDATA[<p>This is a test episode to develop live remote value splits. Go Podcasting!!!</p>]]></itunes:summary>
+    </podcast:liveItem>
+    <item>
+      <title>Duke Ellington and His Orchestra</title>
+      <description><![CDATA[<p>This is a test feed to verify everything is working.</p>]]></description>
+      <itunes:image
+        href="https://curiocaster.com/rss/ep1/78_louisiana_duke-ellington-and-his-orchestra-razaf-schafer-johnson_gbia0064586b_itemimage.jpg" />
+      <enclosure
+        url="https://curiocaster.com/rss/ep1/Louisiana - Duke Ellington and His Orchestra-restored.mp3"
+        length="2611592" type="audio/mpeg" />
+      <guid isPermaLink="false">CC001</guid>
+      <itunes:summary><![CDATA[<p>This is a test feed to verify everything is working.</p>]]></itunes:summary>
+      <itunes:subtitle />
+      <pubDate>Fri, 11 Feb 2022 16:34:35 +0000</pubDate>
+      <itunes:explicit>No</itunes:explicit>
+      <podcast:chapters url="http://34.117.70.159/http%3Amp3s.nashownotes.compc20rss.xml/PC2075"
+        type="application/json" />
+      <podcast:location geo="geo:30.2672,97.7431" osm="R113314">Austin, TX</podcast:location>
+      <podcast:images
+        srcset="https://curiocaster.com/rss/ep1/78_louisiana_duke-ellington-and-his-orchestra-razaf-schafer-johnson_gbia0064586b_itemimage.jpg 1680w" />
+      <itunes:duration>181</itunes:duration>
+    </item>
+    <item>
+      <title>Home in Pasadena</title>
+      <description><![CDATA[ <p><strong>Button Test</strong></p>
+                        <a href="https://thesplitkit.com" style="background-color: #ffc0cb; color: #ffffff; border-radius: 20px; padding: 10px 20px; text-decoration: none; display: inline-block; border: 0px solid #000000; box-shadow: 0px 0px 3px 0px #000000;">BOOST</a>  ]]></description>
+      <enclosure url="https://curiocaster.com/rss/ep2/home.mp3" length="6088873" type="audio/mpeg" />
+      <itunes:image href="https://curiocaster.com/rss/ep2/home.png" />
+      <guid isPermaLink="false">CC002</guid>
+      <itunes:summary><![CDATA[<p>Episode 2</p>]]></itunes:summary>
+      <itunes:subtitle />
+      <pubDate>Wed, 09 Mar 2022 16:34:35 +0000</pubDate>
+      <itunes:explicit>No</itunes:explicit>
+      <podcast:chapters url="http://34.117.70.159/http%3Amp3s.nashownotes.compc20rss.xml/PC2075"
+        type="application/json" />
+      <podcast:location geo="geo:-27.86159,153.3169" osm="W43678282">Dreamworld (Queensland)</podcast:location>
+      <podcast:images srcset="https://curiocaster.com/rss/ep2/home.png 1144w" />
+      <itunes:duration>190</itunes:duration>
+    </item>
+    <item>
+      <title>Alt Enclosure Test</title>
+      <description><![CDATA[<p>Episode 3</p>]]></description>
+      <enclosure type="video/mp4" length="13830269"
+        url="https://noagendatube.com/static/webseed/44304224-fd9d-45ae-b182-78f872f445db-1080.mp4" />
+      <podcast:alternateEnclosure type="video/mp4" length="13830269" bitrate="773721.3426573427"
+        height="1080" default="true">
+        <podcast:source
+          uri="https://noagendatube.com/static/webseed/44304224-fd9d-45ae-b182-78f872f445db-1080.mp4" />
+        <podcast:source
+          uri="https://noagendatube.com/lazy-static/torrents/44304224-fd9d-45ae-b182-78f872f445db-1080.torrent"
+          contentType="application/x-bittorrent" />
+      </podcast:alternateEnclosure>
+      <guid isPermaLink="false">CC00e</guid>
+      <itunes:summary><![CDATA[<p>Episode 3</p>]]></itunes:summary>
+      <itunes:subtitle />
+      <pubDate>Wed, 10 Mar 2022 16:34:35 +0000</pubDate>
+      <itunes:explicit>No</itunes:explicit>
+    </item>
+  </channel>
+</rss>

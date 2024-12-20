@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <base target="_blank" rel="noopener noreferrer" />
+    <link rel="icon" href="%sveltekit.assets%/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CurioCaster</title>
+    %sveltekit.head%
+
+    <meta
+      name="description"
+      content="Listen to all of your favorite podcasts with CurioCaster, the best web-based podcast player. Podcasting 2.0 compliant! Go Podcasting!!!"
+    />
+
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="application-name" content="CurioCaster" />
+    <meta name="apple-mobile-web-app-title" content="CurioCaster" />
+    <meta name="theme-color" content="#333" />
+    <meta name="msapplication-navbutton-color" content="#333" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="msapplication-starturl" content="/" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <link rel="manifest" href="/manifest.json" />
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="512x512"
+      href="/CurioLogo512.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      type="image/png"
+      sizes="512x512"
+      href="/CurioLogo512.png"
+    />
+
+    <script src="https://unpkg.com/swiper@8.4.7/swiper-bundle.min.js"></script>
+    <script src="/workers/helpers/localforage.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/swiper@8.4.7/swiper-bundle.min.css"
+    />
+  </head>
+  <body data-sveltekit-preload-data="hover">
+    <div style="display: contents">%sveltekit.body%</div>
+  </body>
+</html>

@@ -1,0 +1,27 @@
+{
+  "name": "CurioCaster",
+  "short_name": "CurioCaster",
+  "description": "The Best Podcast Player in Texas",
+  "lang": "en-US",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#333",
+  "background_color": "#333",
+  "icons": [
+    {
+      "src": "/CurioLogo192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/CurioLogo240.png",
+      "sizes": "240x240",
+      "type": "image/png"
+    },
+    {
+      "src": "/CurioLogo512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
