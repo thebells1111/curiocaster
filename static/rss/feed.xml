@@ -28,13 +28,17 @@
     <podcast:value type="lightning" method="keysend" suggested="0.00000005000">
       https://curiohoster.com/event?event_id=b1ddabe6-cb0d-4906-a25e-c3bc4afb0ba9https://curiohoster.com/event?event_id=b1ddabe6-cb0d-4906-a25e-c3bc4afb0ba9
       <podcast:valueRecipient
-        name="steven@getalby.com" type="node"
-        address="030a58b8653d32b99200a2334cfe913e51dc7d155aa0116c176657a4f1722677a3"
-        customKey="696969" customValue="eChoVKtO1KujpAA5HCoB" split="50" />
+        name="steven@getalby.com" type="lnaddress"
+        address="steven@getalby.com" split="25" />
         <podcast:valueRecipient
-        name="The Split Kit" type="node"
-        address="030a58b8653d32b99200a2334cfe913e51dc7d155aa0116c176657a4f1722677a3"
-        customKey="696969" customValue="boPNspwDdt7axih5DfKs" split="50" />
+        name="Steven" type="node"
+        address="035ad2c954e264004986da2d9499e1732e5175e1dcef2453c921c6cdcc3536e9d8" split="25" />
+         <podcast:valueRecipient
+        name="ericpp@getalby.com" type="lnaddress"
+        address="ericpp@getalby.com" split="25" />
+        <podcast:valueRecipient
+        name="Eric" type="node"
+        address="02c7bb6f29f09d92d40d62d64443b688891259dea324406b4678df6235794f24bf" split="25" />
     </podcast:value>
     <itunes:category />
     <podcast:complete>no</podcast:complete>
