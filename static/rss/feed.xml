@@ -24,7 +24,7 @@
     <pubDate>Wed, 17 May 2023 18:42:07 +0000</pubDate>
     <lastBuildDate>Wed, 17 May 2023 18:42:07 +0000</lastBuildDate>
     <podcast:location geo="geo:33.51601,-86.81455" osm="R6930627">Birmingham Civil Rights Museum</podcast:location>
-    <podcast:guid>58183156-a6ae-5e36-8875-a1be2ab691bd</podcast:guid>    
+    <podcast:guid>58183156-a6ae-5e36-8875-a1be2ab691bd</podcast:guid>
     <podcast:splitbox
       invoice="https://thesplitbox.com/invoice?address=thesplitbox@getalby.com"
       webhook="https://thesplitbox.com/webhook-sync"
@@ -45,7 +45,7 @@
         address="02c7bb6f29f09d92d40d62d64443b688891259dea324406b4678df6235794f24bf" split="20" />
         <podcast:valueRecipient
         name="ericpp@ln.ericpp.dev" type="lnaddress"
-        address="ericpp@getalby.com" split="10" />   
+        address="ericpp@ln.ericpp.dev" split="10" />
     </podcast:value>
     <itunes:category />
     <podcast:complete>no</podcast:complete>
