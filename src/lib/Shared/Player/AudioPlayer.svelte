@@ -184,7 +184,6 @@
       $userState.volume = 1;
     }
     $player.volume = $userState.volume || 1;
-    $player.volume = 0;
     $mediaSession = navigator.mediaSession;
     setHandlers();
 
