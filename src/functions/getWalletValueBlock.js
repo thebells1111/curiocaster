@@ -12,6 +12,9 @@ export default function getWalletValueBlock(
 ) {
   walletValueBlock.set(undefined);
 
+  console.log(episode);
+  console.log(podcast);
+
   let valueBlock =
     timeSplit && Object.keys(timeSplit).length === 0
       ? null

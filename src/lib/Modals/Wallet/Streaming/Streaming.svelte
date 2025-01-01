@@ -62,7 +62,7 @@
 
     let satValue = $showFiat
       ? dollarsToSats($playingStream ?? $defaultStream)
-      : $playingStream ?? $defaultStream;
+      : ($playingStream ?? $defaultStream);
 
     satValue = Number(satValue) || 0;
 
@@ -99,7 +99,7 @@
     for (const id in runningAmounts) {
       let dest = runningAmounts[id];
 
-      if (dest.value > 3 && dest.value < $satBalance) {
+      if (dest.value > 5 && dest.value < $satBalance) {
         let amount = Math.floor(dest.value);
         try {
           let record = getBaseRecord({ action: "stream", amount });

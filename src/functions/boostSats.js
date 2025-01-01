@@ -34,25 +34,25 @@ export default async function boostSats(keysend) {
       }
       return data;
     });
-    let response = await fetch(remoteServer + "api/alby/boost", {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(keysendData),
-    });
-
-    let res = await response.json();
-
-    // let res = {
-    //   success: true,
-    //   message: "Success",
-    //   data: {
-    //     txid: "d5e2c3c8f2",
+    // let response = await fetch(remoteServer + "api/alby/boost", {
+    //   method: "POST",
+    //   credentials: "include",
+    //   headers: {
+    //     "Content-Type": "application/json",
     //   },
-    // // };
-    // console.log(res);
+    //   body: JSON.stringify(keysendData),
+    // });
+
+    // let res = await response.json();
+
+    let res = {
+      success: true,
+      message: "Success",
+      data: {
+        txid: "d5e2c3c8f2",
+      },
+    };
+    console.log(res);
     return res;
   } catch {
     (err) => console.log(err);

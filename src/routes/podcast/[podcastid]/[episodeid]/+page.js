@@ -1,5 +1,5 @@
 import { remoteServer } from "$/stores";
-import checklive from "$functions/checklive.js";
+import getRSSEditorFeed from "$functions/getRSSFeed.js";
 
 export async function load({ params, fetch }) {
   let podcastId = params.podcastid;
@@ -38,7 +38,7 @@ export async function load({ params, fetch }) {
         podcast.episodes = data[1].items;
         initialPodcast = podcast;
 
-        const feed = await checklive(encodeURIComponent(podcast.url));
+        const feed = await getRSSEditorFeed(encodeURIComponent(podcast.url));
         initialEpisode = feed.live[0];
       }
     }

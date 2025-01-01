@@ -246,6 +246,7 @@ export const walletId = writable("");
 export const pendingEpisodesWallet = writable(null);
 export const pendingEpisodeData = writable(null);
 export const boostBacks = writable(true);
+export const splitbox = writable(null);
 
 //btc conversion
 export const walletCurrency = writable("usd");
