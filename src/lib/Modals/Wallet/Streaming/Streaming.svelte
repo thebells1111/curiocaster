@@ -13,7 +13,6 @@
     satBalance,
     streamingEnabled,
     playingStream,
-    showFiat,
     anonStream,
     nickName,
   } from "$/stores";
@@ -60,9 +59,7 @@
     runningTime += new Date().getTime() - lastTime;
     lastTime = new Date().getTime();
 
-    let satValue = $showFiat
-      ? dollarsToSats($playingStream ?? $defaultStream)
-      : ($playingStream ?? $defaultStream);
+    let satValue = $playingStream ?? $defaultStream;
 
     satValue = Number(satValue) || 0;
 

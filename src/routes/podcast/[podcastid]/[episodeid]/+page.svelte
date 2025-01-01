@@ -3,18 +3,10 @@
   let podcast = data.podcast;
   let episode = data.episode;
 
-  import {
-    initialPodcast,
-    initialEpisode,
-    showFeatured,
-    currentDesktopView,
-  } from "$/stores";
+  import { initialPodcast, initialEpisode, currentDesktopView } from "$/stores";
 
   $initialPodcast = podcast || undefined;
   $initialEpisode = episode || undefined;
-  if ($initialPodcast) {
-    $showFeatured = false;
-  }
 
   $: if ($initialEpisode) {
     $currentDesktopView = "nowPlaying";

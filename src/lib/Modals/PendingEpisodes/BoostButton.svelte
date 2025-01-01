@@ -15,18 +15,6 @@
     pendingEpisodeData,
   } from "$/stores";
 
-  function displayShowSupport() {
-    $pendingEpisodesWallet = valueBlock;
-    $pendingEpisodeData = episode;
-    console.log(episode);
-    if ($showMobile) {
-      $modalSwiperType = "boostagram";
-      $modalSwiper.slideTo(1);
-    } else {
-      $showBoost = true;
-    }
-  }
-
   function enableSwiper() {
     activeButton = false;
     if ($swiper) {
@@ -49,7 +37,6 @@
     on:touchstart|preventDefault={() => (activeButton = true)}
     on:touchend={enableSwiper}
     use:longpress={[10000, $swiper]}
-    on:shortpress={displayShowSupport}
   >
     <div>Boost</div>
   </button>

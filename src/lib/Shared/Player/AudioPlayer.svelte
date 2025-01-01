@@ -57,7 +57,6 @@
   let saveTimeInterval = 60;
   let oncanplayTimeout;
   let episodeLoaded = false;
-
   let debug = true;
   function print(str) {
     if (debug) {

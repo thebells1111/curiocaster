@@ -2,11 +2,7 @@
   import Header from "./Header/Header.svelte";
   import MainScreen from "./MainScreen/MainScreen.svelte";
   import NowPlaying from "./NowPlaying/NowPlaying.svelte";
-  import Featured from "./MainScreen/Featured.svelte";
   import Chat from "./Chat/Chat.svelte";
-
-  import PlayList from "$lib/Shared/PlayList/PlayList.svelte";
-  import Support from "$lib/Shared/Support/Support.svelte";
 
   import PlayerDisplay from "./Player/PlayerDisplay.svelte";
   import PlaybackRate from "$lib/Shared/Player/PlaybackRateDesktop.svelte";
@@ -44,17 +40,7 @@
       >
         <NowPlaying />
       </div>
-      <div class:show={$currentDesktopView === "featured"} class="featured">
-        <Featured />
-      </div>
-      <div class="play-list" class:show={$currentDesktopView === "playList"}>
-        <div class="play-list-card">
-          <PlayList />
-        </div>
-      </div>
-      <div class="support" class:show={$currentDesktopView === "support"}>
-        <Support />
-      </div>
+
       <div class="chat" class:show={$currentDesktopView === "chat"}>
         <Chat />
       </div>
@@ -114,8 +100,6 @@
   .main-screen,
   .now-playing,
   .play-list,
-  .support,
-  .featured,
   .chat {
     display: none;
     height: 100%;

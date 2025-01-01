@@ -1,5 +1,6 @@
 <script>
   import parseSRT from "parse-srt";
+  import clone from "just-clone";
 
   import getPodcastList from "$functions/getPodcastList";
   import startEpisodeUpdates from "./startEpisodeUpdates";
@@ -58,15 +59,14 @@
     recentSettings,
     podcastDB,
     episodeSorter,
-    showFiat,
     tempDB,
     anonBoost,
     anonStream,
     anonBoostagram,
     boostBacks,
     remoteLiveSplits,
-    showMobile,
-    listSwiper,
+    playingSplitbox,
+    splitbox,
   } from "$/stores";
 
   import { browser } from "$app/environment";
@@ -213,15 +213,9 @@
           ? true
           : $userState.enableAutoplay;
 
-      $showFiat = $userState.showFiat;
-
       $walletDisabled = $userState.wallet.disabled;
-      $defaultBoostValue = !$showFiat
-        ? $userState.wallet.defaultBoost
-        : $userState.wallet.usdDefaultBoost || 0;
-      $defaultStream = !$showFiat
-        ? $userState.wallet.defaultStream
-        : $userState.wallet.usdDefaultStream || 0;
+      $defaultBoostValue = $userState.wallet.usdDefaultBoost || 0;
+      $defaultStream = $userState.wallet.usdDefaultStream || 0;
 
       $walletCurrency = $userState.wallet.currency;
 
@@ -326,6 +320,10 @@
 
       getRSS($initialPodcast.url);
 
+      $playingSplitbox = clone($splitbox);
+      console.log($splitbox);
+      console.log($playingSplitbox);
+
       $selectedPodcast = $initialPodcast;
       $episodesList = $selectedPodcast.episodes;
 
@@ -353,12 +351,8 @@
     $episodeSorter = $selectedPodcastState.episodeSorter || "newest";
     $filteredEpisodesList = sortEpisodes($filteredEpisodesList, $episodeSorter);
 
-    $playingBoostValue = $showFiat
-      ? $playingPodcastState?.usdBoost ?? $defaultBoostValue
-      : $playingPodcastState?.boost ?? $defaultBoostValue;
-    $playingStream = $showFiat
-      ? $playingPodcastState?.usdStream ?? $defaultStream
-      : $playingPodcastState?.stream ?? $defaultStream;
+    $playingBoostValue = $playingPodcastState?.boost ?? $defaultBoostValue;
+    $playingStream = $playingPodcastState?.stream ?? $defaultStream;
 
     let episodeState = $playingPodcastState?.[$playingEpisode.guid] || {};
     $playingEpisodeState = episodeState;
@@ -372,12 +366,7 @@
     } else {
       if ($initialEpisode) {
         $middlePane = "nowPlaying";
-      }
-      // else if ($userState?.playing.selectedList === 'playlist' && !fastfollow) {
-      // 	$playingList = $userState?.playlist;
-      // 	$middlePane = 'playlist';
-      // }
-      else {
+      } else {
         $userState.playing.selectedList = "episodes";
         $playingList = $playingPodcast.episodes;
         $middlePane = "episodesList";

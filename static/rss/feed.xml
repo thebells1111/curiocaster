@@ -98,24 +98,6 @@
       <podcast:images srcset="https://curiocaster.com/rss/ep2/home.png 1144w" />
       <itunes:duration>190</itunes:duration>
     </item>
-    <item>
-      <title>Alt Enclosure Test</title>
-      <description><![CDATA[<p>Episode 3</p>]]></description>
-      <enclosure type="video/mp4" length="13830269"
-        url="https://noagendatube.com/static/webseed/44304224-fd9d-45ae-b182-78f872f445db-1080.mp4" />
-      <podcast:alternateEnclosure type="video/mp4" length="13830269" bitrate="773721.3426573427"
-        height="1080" default="true">
-        <podcast:source
-          uri="https://noagendatube.com/static/webseed/44304224-fd9d-45ae-b182-78f872f445db-1080.mp4" />
-        <podcast:source
-          uri="https://noagendatube.com/lazy-static/torrents/44304224-fd9d-45ae-b182-78f872f445db-1080.torrent"
-          contentType="application/x-bittorrent" />
-      </podcast:alternateEnclosure>
-      <guid isPermaLink="false">CC00e</guid>
-      <itunes:summary><![CDATA[<p>Episode 3</p>]]></itunes:summary>
-      <itunes:subtitle />
-      <pubDate>Wed, 10 Mar 2022 16:34:35 +0000</pubDate>
-      <itunes:explicit>No</itunes:explicit>
-    </item>
+
   </channel>
 </rss>

@@ -78,7 +78,6 @@ export const userState = writable({
     podcastState: {},
     episodeState: {},
   },
-  playlist: [],
 });
 export const loggedIn = writable(false);
 export const nickName = writable("anonymous");
@@ -90,7 +89,6 @@ export const updatingVersion = writable(false);
 export const updatingVersionCount = writable(0);
 export const filteringEpisodes = writable(false);
 export const showMobileChat = writable(false);
-export const feedItems = writable([]);
 
 //loadedStatus
 export const isLoaded = writable(false);
@@ -120,9 +118,8 @@ export const selectedPodcast = writable({});
 export const playingEpisode = writable({});
 export const playingPodcast = writable({});
 export const playingList = writable([]);
-export const selectedPlayingList = writable("playlist");
 export const parser = writable();
-export const showFeatured = writable(true);
+export const selectedPlayingList = writable("playlist");
 export const showSubscriptionShowNotes = writable(false);
 export const liveEpisodes = writable([]);
 export const lastLiveUpdate = writable(0);
@@ -130,6 +127,9 @@ export const showPodcastFilter = writable(false);
 export const liveLoading = writable(false);
 export const pendingEpisodes = writable([]);
 export const feedTitle = writable("Recent Episodes");
+export const feedItems = writable([]);
+export const feedChannel = writable({});
+export const playingFeedValue = writable([]);
 
 //merged episode queues
 export const recentEpisodes = writable([]);
@@ -159,7 +159,6 @@ export const goFullscreen = writable(false);
 export const showPodcastSearch = writable(false);
 export const isUpdatingEpisodes = writable(false);
 export const updateEpisodesProgress = writable(0);
-export const playList = writable([]);
 export const mobileNavButtons = writable([]);
 export const searchListPodcastSelected = writable(false);
 export const episodeIsReady = writable(true);
@@ -180,7 +179,6 @@ export const currentMobilePage = writable(0);
 export const showMobile = writable(false);
 export const showMobileChapters = writable(false);
 export const mobileFullScreen = writable(false);
-export const featuredPodcasts = writable({ cat: "", feeds: [] });
 export const podcastSearchResults = writable({ cat: "", feeds: [] });
 
 //swiper
@@ -200,7 +198,6 @@ export const showDisclaimer = writable(false);
 export const showVideo = writable(false);
 export const showWallet = writable(false);
 export const showBoost = writable(false);
-export const showSupport = writable(false);
 export const showShareClip = writable(false);
 export const showLogin = writable(false);
 export const showInvoice = writable(false);
@@ -217,11 +214,9 @@ export const modalSwiper = writable();
 export const modalSwiperType = writable("");
 export const listSwiper = writable();
 export const listSwiperType = writable("");
-export const playlistSwiper = writable("");
 export const resetEpisodesIndex = writable();
 export const walletSwiper = writable();
 export const walletSwiperType = writable("");
-export const supportSwiper = writable();
 
 //wallet
 export const satBalance = writable(null);
@@ -247,6 +242,7 @@ export const pendingEpisodesWallet = writable(null);
 export const pendingEpisodeData = writable(null);
 export const boostBacks = writable(true);
 export const splitbox = writable(null);
+export const playingSplitbox = writable(null);
 
 //btc conversion
 export const walletCurrency = writable("usd");
@@ -262,15 +258,12 @@ export const togglePreview = writable(true);
 
 //BTC conversion
 export const btcPrice = writable(0);
-export const showFiat = writable(false);
 
 //sleep timer
 export const sleepStopTime = writable(0);
 export const sleepOnEpisodeEnd = writable(false);
-export const showSleepTimer = writable(false);
 
 export const selectedMediaType = writable("podcast");
-export const musicList = writable([]);
 
 export const pendingBoosts = writable({});
 export const clearedBoosts = writable({});

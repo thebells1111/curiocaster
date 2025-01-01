@@ -1,22 +1,28 @@
 import { parse } from "fast-xml-parser";
 import { decode } from "html-entities";
 import {
+  feedChannel,
   liveEpisodes,
   pendingEpisodes,
   feedItems,
   remoteServer,
+  splitbox,
 } from "$/stores";
 
 export default async function getRSSEditorFeed(url) {
   return new Promise(async (resolve, reject) => {
     const feed = await getFeed(encodeURIComponent(url));
-    console.log(feed);
 
     liveEpisodes.set(feed.live || []);
 
     pendingEpisodes.set(feed.pending || []);
 
     feedItems.set(feed.item || []);
+
+    feedChannel.set(feed.channel || {});
+
+    splitbox.set(feed?.channel?.["podcast:splitbox"]);
+    console.log(feed?.channel?.["podcast:splitbox"]);
 
     resolve(feed);
   });
@@ -95,7 +101,6 @@ const getFeed = async (url) => {
 };
 
 function parseValue(v) {
-  console.log(v);
   if (v) {
     let value = {
       model: {

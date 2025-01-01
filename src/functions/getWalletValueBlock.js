@@ -1,5 +1,10 @@
 import clone from "just-clone";
-import { walletValueBlock, walletDisabled } from "$/stores";
+import {
+  walletValueBlock,
+  walletDisabled,
+  feedItems,
+  feedChannel,
+} from "$/stores";
 
 import { get } from "svelte/store";
 
@@ -12,9 +17,6 @@ export default function getWalletValueBlock(
 ) {
   walletValueBlock.set(undefined);
 
-  console.log(episode);
-  console.log(podcast);
-
   let valueBlock =
     timeSplit && Object.keys(timeSplit).length === 0
       ? null
@@ -23,7 +25,6 @@ export default function getWalletValueBlock(
 
   if (walletBlock) {
     let destinations = valueBlock.destinations;
-
     walletBlock.destinations = normalizeDestinations([].concat(destinations));
     walletBlock.feedGuid = feedGuid;
     walletBlock.itemGuid = itemGuid;
@@ -33,7 +34,6 @@ export default function getWalletValueBlock(
 }
 
 function normalizeDestinations(data) {
-  console.log(clone(data));
   const nonFeeItems = data.filter((item) => !item.fee);
   const feeItems = data.filter((item) => item.fee);
 
@@ -50,6 +50,6 @@ function normalizeDestinations(data) {
 
   // Merge fee and non-fee items
   const normalizedData = nonFeeItems.concat(feeItems);
-
+  console.log(normalizedData);
   return normalizedData;
 }

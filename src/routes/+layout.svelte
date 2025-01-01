@@ -8,7 +8,6 @@
   import OPML from "$lib/Modals/OPML/OPMLModal.svelte";
   import Preferences from "$lib/Modals/Preferences/Preferences.svelte";
   import PendingEpisodes from "$lib/Modals/PendingEpisodes/PendingEpisodesModal.svelte";
-  import SleepTimer from "$lib/Modals/SleepTimer/SleepTimerModal.svelte";
   import { onMount } from "svelte";
   import { page } from "$app/stores";
 
@@ -175,7 +174,6 @@
   <OPML />
 
   <Preferences />
-  <SleepTimer />
 
   {#if $showPending}
     <PendingEpisodes />

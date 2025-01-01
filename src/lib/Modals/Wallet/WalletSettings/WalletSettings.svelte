@@ -13,7 +13,6 @@
     showMobile,
     walletSwiperType,
     walletSwiper,
-    showFiat,
     playingBoostValue,
     playingStream,
     defaultBoostValue,
@@ -38,41 +37,11 @@
       showAmounts = true;
     }
   }
-
-  function toggleCurrency(e, state) {
-    const checked = e?.detail?.checked || state;
-    $showFiat = checked;
-    $userState.showFiat = $showFiat;
-    userStateDB.setItem("userState", $userState);
-
-    if (checked) {
-      $playingBoostValue = satsToDollars($playingBoostValue);
-      $playingStream = satsToDollars($playingStream);
-      $defaultBoostValue = satsToDollars($defaultBoostValue);
-      $defaultStream = satsToDollars($defaultStream);
-      $playingPodcastState.usdBoost = $playingBoostValue;
-      $playingPodcastState.usdStream = $playingStream;
-    } else {
-      $playingBoostValue = dollarsToSats($playingBoostValue);
-      $playingStream = dollarsToSats($playingStream);
-      $defaultBoostValue = dollarsToSats($defaultBoostValue);
-      $defaultStream = dollarsToSats($defaultStream);
-      $playingPodcastState.boost = $playingBoostValue;
-      $playingPodcastState.stream = $playingStream;
-    }
-    savePlayingPodcastState();
-  }
 </script>
 
 <div class="header">
   <h2>
-    {#if $showFiat}
-      {Number($satBalance) > -1
-        ? `$${satsToDollars($satBalance)} remaining`
-        : "$0.00 remaining"}
-    {:else}
-      {Number($satBalance) > -1 ? `${$satBalance} sats remaining` : ""}
-    {/if}
+    {Number($satBalance) > -1 ? `${$satBalance} sats remaining` : ""}
   </h2>
 </div>
 <ul>
@@ -81,24 +50,6 @@
     Turn {$walletDisabled ? "On" : "Off"} Wallet
   </li>
 </ul>
-
-<div class="switch">
-  <span on:click={toggleCurrency.bind(null, null, !$showFiat)}>₿</span>
-  <Switch
-    on:change={toggleCurrency}
-    checked={$showFiat}
-    onColor="#888"
-    handleDiameter={15}
-    unCheckedIcon={false}
-    activeBoxShadow="0px 0px 1px 10px rgba(0, 0, 0, 0.2)"
-    height={10}
-    width={30}
-  >
-    <span slot="checkedIcon" />
-    <span slot="unCheckedIcon" />
-  </Switch>
-  <span on:click={toggleCurrency.bind(null, null, !$showFiat)}>$</span>
-</div>
 
 <style>
   .header {

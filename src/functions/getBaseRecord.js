@@ -78,7 +78,6 @@ export default function getBaseRecord({ action, amount, pending }) {
   }
 
   if (!$anonBoost) {
-    console.log($nickName);
     baseRecord[7629169].sender_name = $nickName;
     baseRecord[7629169].sender_id =
       $userState?.wallet?.address?.lightning_address;
@@ -97,11 +96,13 @@ export default function getBaseRecord({ action, amount, pending }) {
   if ($boostBacks) {
     baseRecord[7629169].reply_address =
       $userState.wallet.address.keysend_pubkey;
-    baseRecord[7629169].reply_custom_key = Number(
-      $userState.wallet.address.keysend_custom_key
-    );
-    baseRecord[7629169].reply_custom_value =
-      $userState.wallet.address.keysend_custom_value;
+    if ($userState.wallet.address.keysend_custom_key) {
+      baseRecord[7629169].reply_custom_key = Number(
+        $userState.wallet.address.keysend_custom_key
+      );
+      baseRecord[7629169].reply_custom_value =
+        $userState.wallet.address.keysend_custom_value;
+    }
   }
   if ($walletValueBlock?.feedGuid) {
     baseRecord[7629169].remote_feed_guid = $walletValueBlock?.feedGuid;

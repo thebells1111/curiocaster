@@ -3,7 +3,6 @@
   import throwConfetti from "$functions/throwConfetti";
   import satsToDollars from "$functions/satsToDollars.js";
   import boostSats from "$functions/boostSats";
-  import WalletIcon from "$lib/icons/Wallet.svelte";
   import clone from "just-clone";
   import getBaseRecord from "$functions/getBaseRecord";
 
@@ -17,20 +16,12 @@
     btcPrice,
     walletValueBlock,
     pendingEpisodesWallet,
-    pendingEpisodeData,
-    selectedPodcast,
-    supportSwiper,
     modalSwiper,
     modalSwiperType,
     anonBoostagram,
     showMobile,
-    showInvoice,
-    walletSwiper,
-    walletSwiperType,
     boostBacks,
   } from "$/stores";
-
-  export let curioSupport = false;
 
   let destinations = [];
   let textarea;
@@ -43,26 +34,6 @@
 
   export let saveText = "";
   export let displayText = "";
-
-  let cc = {
-    name: "CurioCaster Support",
-    address:
-      "030a58b8653d32b99200a2334cfe913e51dc7d155aa0116c176657a4f1722677a3",
-    type: "node",
-    customKey: "696969",
-    customValue: "eChoVKtO1KujpAA5HCoB",
-    split: 80,
-  };
-
-  let podcastIndex = {
-    name: "Podcastindex.org",
-    address:
-      "03ae9f91a0cb8ff43840e3c322c4c61f019d8c1c3cea15a25cfc425ac605e61a4a",
-    type: "node",
-    split: 20,
-  };
-
-  let curioSupportDestinations = [cc, podcastIndex];
 
   function checkSatValue(lastKeystroke) {
     if ($satBalance < satValue) {
@@ -94,10 +65,6 @@
     }
   }
 
-  if (curioSupport) {
-    destinations = curioSupportDestinations;
-  }
-
   function saveNickName() {
     $nickName = sender;
     $userState.nickName = sender;
@@ -122,16 +89,12 @@
   }
 
   async function handleSubmit() {
-    if (curioSupport) {
-      destinations = curioSupportDestinations;
-    }
     let memo = textarea.value.substring(0, maxTextLength);
 
     if ($showMobile) {
       $showBoostStatus = true;
       processBoost(satValue, destinations, memo);
       $showBoost = false;
-      $supportSwiper.slideTo(0, 0);
       if ($modalSwiperType === "boostagram") {
         $modalSwiper.slideTo(0, 0);
       }
@@ -146,20 +109,10 @@
     throwConfetti();
     let record = {};
 
-    if (!curioSupport) {
-      record = await getBaseRecord({
-        action: "boost",
-        amount: satValue,
-      });
-    } else {
-      record = {
-        7629169: {
-          podcast: "CurioSupport",
-          action: "boost",
-          app_name: "CurioCaster",
-        },
-      };
-    }
+    record = await getBaseRecord({
+      action: "boost",
+      amount: satValue,
+    });
 
     $satBalance -= satValue;
 
@@ -209,15 +162,6 @@
     });
   }
 
-  function handleShowInvoice() {
-    if ($showMobile) {
-      $walletSwiperType = "invoice";
-      $walletSwiper.slideTo(1);
-    } else {
-      $showInvoice = true;
-    }
-  }
-
   function handleBoostBackChange(e) {
     $boostBacks = !$boostBacks;
     $userState.boostBacks = $boostBacks;
@@ -226,16 +170,7 @@
 </script>
 
 <div class="header">
-  {#if curioSupport}
-    <h1>Thanks for boosting<br />CurioCaster!</h1>
-  {/if}
-
   <div class="sats-header">
-    <button class="refill" on:click={handleShowInvoice}>
-      <span>Refill</span>
-      <WalletIcon />
-      <span>Wallet</span>
-    </button>
     <h2>
       {$satBalance ? `${$satBalance} sats remaining` : ""}
     </h2>
@@ -460,24 +395,9 @@
   .sats-header {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     width: 100%;
     align-items: center;
     margin-bottom: 4px;
-  }
-
-  .refill {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: transparent;
-    margin: 0;
-    padding: 0;
-    width: 42px;
-    border: none;
-  }
-
-  .refill span {
-    font-size: 0.6em;
   }
 </style>

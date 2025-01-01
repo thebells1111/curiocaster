@@ -27,14 +27,10 @@
     modalSwiperType,
     walletSwiper,
     walletSwiperType,
-    showFiat,
-    showSupport,
   } from "$/stores";
 
   async function processBoost(valueTag) {
-    let satValue = $showFiat
-      ? dollarsToSats($playingBoostValue ?? $defaultBoostValue)
-      : $playingBoostValue ?? $defaultBoostValue;
+    let satValue = $playingBoostValue ?? $defaultBoostValue;
     if ($satBalance > satValue) {
       throwConfetti();
 
@@ -42,21 +38,15 @@
 
       if (valueTag) {
         let destinations = valueTag.destinations;
-        console.log(destinations);
         let payments = [];
 
         let feesDestinations = destinations.filter((v) => {
-          console.log(v.fee);
           return v.fee;
         });
         let splitsDestinations = destinations.filter((v) => {
-          console.log(!v.fee);
           return !v.fee;
         });
         let runningTotal = satValue;
-
-        console.log(feesDestinations);
-        console.log(splitsDestinations);
 
         for (const dest of feesDestinations) {
           let feeRecord = getBaseRecord({ action: "boost", amount: satValue });
@@ -219,18 +209,14 @@
 </script>
 
 {#if $showBoost}
-  <Boostagram curioSupport={$showSupport} />
+  <Boostagram />
 {/if}
 <BoostStatus />
 <div class="container">
   <div class="controls-container" class:hide={$walletDisabled}>
     {#if $satBalance !== null && $walletValueBlock}
       <p on:click={openInvoice}>
-        {#if $showFiat}
-          ${satsToDollars(Math.floor($satBalance))}<br />remaining
-        {:else}
-          {Math.floor($satBalance)} sats<br />remaining
-        {/if}
+        {Math.floor($satBalance)} sats<br />remaining
       </p>
     {:else}
       <p />
@@ -248,11 +234,7 @@
         >
           <div>Boost</div>
           <div class="boost-value">
-            {#if $showFiat}
-              ${$playingBoostValue ?? $defaultBoostValue}
-            {:else}
-              {$playingBoostValue ?? $defaultBoostValue}
-            {/if}
+            {$playingBoostValue ?? $defaultBoostValue}
           </div>
         </button>
         <p>Hold to send a Boostagram</p>
@@ -262,11 +244,7 @@
     {#if $satBalance !== null && $walletValueBlock}
       <p class="streaming" on:click={openWallet}>
         streaming<br />
-        {#if $showFiat}
-          ${$playingStream ?? $defaultStream}/min
-        {:else}
-          {$playingStream ?? $defaultStream} sats/min
-        {/if}
+        {$playingStream ?? $defaultStream} sats/min
       </p>
     {:else}
       <p />
