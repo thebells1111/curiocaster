@@ -155,6 +155,7 @@
           customKey: d.customKey,
           customValue: d.customValue,
           fee: d.fee,
+          type: d.type,
         };
       }
     }
