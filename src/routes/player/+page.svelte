@@ -219,6 +219,37 @@
     }
   }
 
+  function setULID(src) {
+    //See if a pciguid exists in local storage.  They are stored using a hash of the enclosure url as the key to avoid
+    //character encoding issues with what browsers accept as a valid key.  If the value exists, get it.  If not, create
+    //a new on and store it for potential use later if this enclosure is played again by this user
+    let stripped = src.split("?")[0];
+    let enclosureHash = sha256(stripped);
+    var pciStatsGuid = localStorage.getItem(enclosureHash);
+    if (pciStatsGuid === null) {
+      pciStatsGuid = uuidv4();
+      localStorage.setItem(enclosureHash, pciStatsGuid);
+    }
+
+    //Attach the pciguid value to the end of the enclosure url as a query parameter to pass back to the host/cdn for
+    //anonymous, yet reliable tracking stats
+    var pciGuid = "";
+    if (src.indexOf("?") > -1) {
+      pciGuid = "&_ulid=" + pciStatsGuid;
+    } else {
+      pciGuid = "?_ulid=" + pciStatsGuid;
+    }
+
+    //Tag a _from on the end to give a stats hint
+    var fromTag = "&_from=curiocaster.com";
+    if (src.indexOf("_from=") > -1) {
+      fromTag = "";
+    }
+
+    //Assemble the new url
+    returnsrc + pciGuid + fromTag;
+  }
+
   function setSource(src) {
     $showVideo =
       $playingEpisode && `${$playingEpisode.enclosureType}`.includes("video");
@@ -233,7 +264,7 @@
         isM3U8 = true;
         $showVideo = true;
         if ($player.canPlayType("application/vnd.apple.mpegurl")) {
-          $player.src = src;
+          $player.src = setULID(src);
           //
           // If no native HLS support, check if HLS.js is supported
           //
@@ -256,7 +287,7 @@
           });
         }
       } else {
-        $player.src = src;
+        $player.src = setULID(src);
       }
     }
   }
@@ -264,7 +295,8 @@
   function setSrcTimes() {
     if ($player && $srcStopTime) {
       if (!isM3U8) {
-        $player.src = $player.src + `#t=${$srcStartTime || 0},${$srcStopTime}`;
+        $player.src = $player.src =
+          setULID($player.src) + `#t=${$srcStartTime || 0},${$srcStopTime}`;
       }
     }
   }
