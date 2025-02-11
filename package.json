@@ -45,6 +45,7 @@
     "svelte-select": "^4.4.1",
     "svelte-switch": "0.0.5",
     "svelte-tiny-virtual-list": "^1.1.6",
+    "uuid": "^11.0.5",
     "xml2js": "^0.4.23"
   },
   "type": "module"

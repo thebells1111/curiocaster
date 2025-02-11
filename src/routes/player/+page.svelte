@@ -1,4 +1,6 @@
 <script>
+  import sha256 from "crypto-js/sha256";
+  import { v4 as uuidv4 } from "uuid";
   import parseSRT from "parse-srt";
   import PlayingImg from "$lib/Shared/NowPlaying/PlayingImg.svelte";
   import sortChapters from "$functions/sortChapters";
@@ -247,7 +249,7 @@
     }
 
     //Assemble the new url
-    returnsrc + pciGuid + fromTag;
+    return src + pciGuid + fromTag;
   }
 
   function setSource(src) {

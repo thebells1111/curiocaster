@@ -1,5 +1,7 @@
 <script>
   import sha256 from "crypto-js/sha256";
+
+  import { v4 as uuidv4 } from "uuid";
   import savePlayingPodcastState from "$functions/savePlayingPodcastState.js";
   import loadEpisode from "$functions/loadEpisode.js";
   import sortEpisodes from "$functions/sortEpisodes";
@@ -104,7 +106,7 @@
     }
 
     //Assemble the new url
-    returnsrc + pciGuid + fromTag;
+    return src + pciGuid + fromTag;
   }
 
   function setSource(src) {
