@@ -8,7 +8,7 @@ export default async function boostSats(keysend) {
     const $playingSplitbox = get(playingSplitbox);
     console.log($playingSplitbox);
 
-    if ($playingSplitbox) {
+    if ($playingSplitbox && false) {
       let tlv = keysend?.[0]?.record?.[7629169];
       delete tlv.value_msat;
       let invoiceRoute = $playingSplitbox["@_invoice"];
@@ -73,7 +73,7 @@ export default async function boostSats(keysend) {
       //     txid: "d5e2c3c8f2",
       //   },
       // };
-      // console.log(res);
+      console.log(res);
     }
     return res;
   } catch {
