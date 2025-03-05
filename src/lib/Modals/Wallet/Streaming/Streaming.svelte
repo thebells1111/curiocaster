@@ -2,6 +2,7 @@
   import boostSats from "$functions/boostSats";
   import dollarsToSats from "$functions/dollarsToSats";
   import getBaseRecord from "$functions/getBaseRecord";
+  import refreshAlbyToken from "$functions/refreshAlbyToken";
 
   import {
     playingPodcast,
@@ -92,6 +93,10 @@
 
   async function processPayment() {
     console.log(`still streaming for ${$playingPodcast.title}`);
+
+    // Refresh Alby token and balance before making payment
+    await refreshAlbyToken();
+
     let payments = [];
     for (const id in runningAmounts) {
       let dest = runningAmounts[id];

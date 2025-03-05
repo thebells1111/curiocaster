@@ -3,6 +3,7 @@
   import throwConfetti from "$functions/throwConfetti";
   import satsToDollars from "$functions/satsToDollars.js";
   import boostSats from "$functions/boostSats";
+  import refreshAlbyToken from "$functions/refreshAlbyToken";
   import clone from "just-clone";
   import getBaseRecord from "$functions/getBaseRecord";
 
@@ -108,6 +109,8 @@
   async function processBoost(satValue, destinations, memo) {
     throwConfetti();
     let record = {};
+
+    await refreshAlbyToken();
 
     record = await getBaseRecord({
       action: "boost",

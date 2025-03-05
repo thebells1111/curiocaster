@@ -243,6 +243,7 @@ export const pendingEpisodeData = writable(null);
 export const boostBacks = writable(true);
 export const splitbox = writable(null);
 export const playingSplitbox = writable(null);
+export const lastAlbyRefreshTime = writable(0);
 
 //btc conversion
 export const walletCurrency = writable("usd");
