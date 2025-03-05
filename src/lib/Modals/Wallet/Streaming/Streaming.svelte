@@ -1,4 +1,6 @@
 <script>
+  import { onDestroy } from 'svelte';
+
   import boostSats from "$functions/boostSats";
   import dollarsToSats from "$functions/dollarsToSats";
   import getBaseRecord from "$functions/getBaseRecord";
@@ -25,6 +27,13 @@
   let oldInterval;
   let runningInterval;
   //two intervals are needed because of how setInterval keeps track of intervals
+
+  onDestroy(() => {
+    if (runningInterval) {
+      clearInterval(runningInterval);
+      runningInterval = null;
+    }
+  });
 
   $: if ($walletValueBlock) {
     handleNewValueBlock();
