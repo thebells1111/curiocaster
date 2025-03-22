@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@fontsource/fira-mono": "^5.0.3",
+    "@plussub/srt-vtt-parser": "^2.0.5",
     "@sveltejs/adapter-vercel": "^4.0.4",
     "axios": "^1.6.5",
     "canvas-confetti": "^1.4.0",
@@ -36,7 +37,6 @@
     "jsqr": "^1.4.0",
     "just-clone": "^6.2.0",
     "just-compare": "^1.4.0",
-    "parse-srt": "^1.0.0-alpha",
     "sanitize-html": "^2.5.1",
     "socket.io-client": "^4.6.1",
     "string-hash": "^1.1.3",

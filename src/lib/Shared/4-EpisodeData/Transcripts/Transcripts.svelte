@@ -1,8 +1,8 @@
 <script>
-	import parseSRT from 'parse-srt';
 	import VirtualList from 'svelte-tiny-virtual-list';
 
 	import convertTime from '$functions/convertTime';
+	import getTranscript from '$functions/getTranscript';
 
 	import {
 		selectedEpisode,
@@ -23,40 +23,12 @@
 
 	// $rightPane = 'transcripts';
 
-	async function getTranscript(transcriptSRT) {
-		console.log(transcriptSRT.url);
-		let res = await fetch(`/api/httpsproxy?url=` + transcriptSRT.url);
-		if (res.status === 200) {
-			let text = await res.text();
-			let transcript = parseSRT(text);
-			let t = transcript
-				.map((v) => v.text)
-				.join(' ')
-				.replace(/(<|&lt;)br\s*\/*(>|&gt;)/g, ' ');
-
-			transcript.full = t.split('|-|').join(' ');
-			$selectedEpisodeTranscript = transcript;
-			if (episode.title === $playingEpisode.title) {
-				$playingEpisodeTranscript = transcript;
-			}
-		} else {
-			$selectedEpisodeTranscript = null;
-			filteredTranscript = null;
-		}
-	}
-
 	$: if (episode && episode.transcripts) {
-		const transcriptSRT = episode.transcripts?.find(
-			({ type }) =>
-				type === 'application/srt' || type === 'text/srt' || type === 'application/x-subrip'
-		);
-
-		if (transcriptSRT?.url) {
-			getTranscript(transcriptSRT);
-		} else {
-			$selectedEpisodeTranscript = null;
-			filteredTranscript = null;
-		}
+		$selectedEpisodeTranscript = null;
+		filteredTranscript = null;
+		getTranscript(episode.transcripts).then(transcript => {
+			$selectedEpisodeTranscript = transcript;
+		});
 	} else {
 		$selectedEpisodeTranscript = null;
 		filteredTranscript = null;
