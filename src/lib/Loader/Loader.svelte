@@ -5,7 +5,7 @@
   import getPodcastList from "$functions/getPodcastList";
   import startEpisodeUpdates from "./startEpisodeUpdates";
   import sortEpisodes from "$functions/sortEpisodes";
-  import sortChapters from "$functions/sortChapters";
+  import getChapters from '$functions/getChapters';
 
   import getRSS from "$functions/getRSSFeed";
 
@@ -246,12 +246,7 @@
       $playerDuration = $userState.playing.episodeState?.duration || 0;
 
       if ($playingEpisode?.chaptersUrl) {
-        const res = await fetch(
-          `/api/httpsproxy?url=` +
-            encodeURIComponent($playingEpisode?.chaptersUrl)
-        );
-        const chapters = await res.json();
-        $playingEpisodeChapters = sortChapters(chapters);
+        $playingEpisodeChapters = await getChapters($playingEpisode?.chaptersUrl);
       }
 
       const transcriptSRT = $playingEpisode.transcripts?.find(

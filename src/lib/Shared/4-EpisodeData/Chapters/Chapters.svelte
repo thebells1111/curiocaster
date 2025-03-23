@@ -1,7 +1,7 @@
 <script>
   import convertTime from "$functions/convertTime";
   import Image from "$functions/Image.svelte";
-  import sortChapters from "$functions/sortChapters";
+  import getChapters from "$functions/getChapters";
 
   import {
     selectedEpisode,
@@ -24,30 +24,11 @@
   export let episode = $selectedEpisode;
 
   $: if (episode && episode?.chaptersUrl) {
-    getChapters(episode.chaptersUrl, "selected");
+    getChapters(episode?.chaptersUrl).then(chapters => {
+      $selectedEpisodeChapters = chapters
+    });
   } else {
     $selectedEpisodeChapters = undefined;
-  }
-
-  async function getChapters(url, selector) {
-    let chapters;
-    if (url) {
-      let res = await fetch(`/api/httpsproxy?url=` + encodeURIComponent(url));
-      let text = await res.text();
-      chapters = hasJsonStructure(text);
-    }
-    if (selector === "selected") {
-      $selectedEpisodeChapters = sortChapters(chapters);
-    }
-
-    function hasJsonStructure(str) {
-      if (typeof str !== "string") return false;
-      try {
-        return JSON.parse(str);
-      } catch (err) {
-        return false;
-      }
-    }
   }
 
   function jumpToChapter(chapter, index) {
