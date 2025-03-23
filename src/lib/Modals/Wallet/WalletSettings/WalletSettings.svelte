@@ -1,6 +1,7 @@
 <script>
   import savePlayingPodcastState from "$functions/savePlayingPodcastState";
   import Switch from "svelte-switch";
+  import getWalletValueBlock from "$functions/getWalletValueBlock";
 
   import satsToDollars from "$functions/satsToDollars.js";
   import dollarsToSats from "$functions/dollarsToSats.js";
@@ -18,6 +19,8 @@
     defaultBoostValue,
     defaultStream,
     playingPodcastState,
+    playingEpisode,
+    playingPodcast,
   } from "$/stores";
 
   export let showAmounts = false;
@@ -26,7 +29,14 @@
     $walletDisabled = !$walletDisabled;
     $userState.wallet.disabled = $walletDisabled;
 
+    // Save the updated state to the database
     userStateDB.setItem("userState", $userState);
+
+    // If wallet is being turned on, update the wallet value block
+    if (!$walletDisabled) {
+      // Update the wallet value block with current episode and podcast
+      getWalletValueBlock($playingEpisode, $playingPodcast);
+    }
   }
 
   function handleShowAmounts() {

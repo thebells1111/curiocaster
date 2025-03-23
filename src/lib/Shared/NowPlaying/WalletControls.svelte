@@ -7,6 +7,7 @@
   import dollarsToSats from "$functions/dollarsToSats";
   import boostSats from "$functions/boostSats";
   import getBaseRecord from "$functions/getBaseRecord";
+  import refreshAlbyToken from "$functions/refreshAlbyToken";
 
   import {
     devMode,
@@ -33,6 +34,8 @@
     let satValue = $playingBoostValue ?? $defaultBoostValue;
     if ($satBalance > satValue) {
       throwConfetti();
+
+      await refreshAlbyToken();
 
       $satBalance -= satValue;
 

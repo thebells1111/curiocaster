@@ -2,8 +2,11 @@
   import sha256 from "crypto-js/sha256";
   import { v4 as uuidv4 } from "uuid";
   import PlayingImg from "$lib/Shared/NowPlaying/PlayingImg.svelte";
+
   import sortChapters from "$functions/sortChapters";
   import getTranscript from "$functions/getTranscript";
+  import getChapters from "$functions/getChapters";
+
 
   import Hls from "hls.js";
 
@@ -98,19 +101,12 @@
   }
 
   if ($playingEpisode?.chaptersUrl) {
-    getChapters($playingEpisode.chaptersUrl, "selected");
+    getChapters(episode?.chaptersUrl).then(chapters => {
+      $playingEpisodeChapters = chapters;
+    });
   } else {
     $playingEpisodeChapters = undefined;
   }
-
-  async function getChapters(url, selector) {
-    let chapters;
-    if (url && browser) {
-      let res = await fetch(`/api/httpsproxy?url=` + encodeURIComponent(url));
-      chapters = await res.json();
-    }
-    if (selector === "selected") {
-      $playingEpisodeChapters = sortChapters(chapters);
     }
   }
 

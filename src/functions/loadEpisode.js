@@ -1,5 +1,6 @@
 import findMatchingEpisodeFromFeed from "./findMatchingEpisodeFromFeed";
 import getTranscript from './getTranscript';
+import getChapters from './getChapters';
 
 import clone from "just-clone";
 
@@ -104,11 +105,8 @@ export default async function loadEpisode(episode, podcast, playingList) {
   playingEpisode.set(episode);
 
   if (episode?.chaptersUrl) {
-    const res = await fetch(
-      `/api/httpsproxy?url=` + encodeURIComponent(episode?.chaptersUrl)
-    );
-    const chap = await res.json();
-    playingEpisodeChapters.set(chap.chapters);
+    const chapters = await getChapters(episode?.chaptersUrl);
+    playingEpisodeChapters.set(chapters);
   } else {
     playingEpisodeChapters.set(undefined);
   }
