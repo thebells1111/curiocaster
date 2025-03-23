@@ -98,7 +98,7 @@
   }
 
   if ($playingEpisode?.chaptersUrl) {
-    getChapters(episode?.chaptersUrl).then(chapters => {
+    getChapters(episode?.chaptersUrl).then((chapters) => {
       $playingEpisodeChapters = chapters;
     });
   } else {
