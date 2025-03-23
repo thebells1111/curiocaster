@@ -7,7 +7,6 @@
   import getTranscript from "$functions/getTranscript";
   import getChapters from "$functions/getChapters";
 
-
   import Hls from "hls.js";
 
   import ControlsOverlay from "$lib/Shared/NowPlaying/ControlsOverlay.svelte";
@@ -107,8 +106,6 @@
   } else {
     $playingEpisodeChapters = undefined;
   }
-    }
-  }
 
   $: $posterUrl =
     $chapterDisplayImage ||
@@ -119,9 +116,9 @@
 
   $: if ($playingEpisode && $playingEpisode.transcripts && browser) {
     $playingEpisodeTranscript = null;
-    getTranscript($playingEpisode.transcripts).then(transcript => {
+    getTranscript($playingEpisode.transcripts).then((transcript) => {
       $playingEpisodeTranscript = transcript;
-    })
+    });
   }
 
   let playerTimeout;
