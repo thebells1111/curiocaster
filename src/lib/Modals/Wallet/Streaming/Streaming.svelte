@@ -1,7 +1,10 @@
 <script>
+  import { onDestroy } from 'svelte';
+
   import boostSats from "$functions/boostSats";
   import dollarsToSats from "$functions/dollarsToSats";
   import getBaseRecord from "$functions/getBaseRecord";
+  import refreshAlbyToken from "$functions/refreshAlbyToken";
 
   import {
     playingPodcast,
@@ -24,6 +27,13 @@
   let oldInterval;
   let runningInterval;
   //two intervals are needed because of how setInterval keeps track of intervals
+
+  onDestroy(() => {
+    if (runningInterval) {
+      clearInterval(runningInterval);
+      runningInterval = null;
+    }
+  });
 
   $: if ($walletValueBlock) {
     handleNewValueBlock();
@@ -92,6 +102,10 @@
 
   async function processPayment() {
     console.log(`still streaming for ${$playingPodcast.title}`);
+
+    // Refresh Alby token and balance before making payment
+    await refreshAlbyToken();
+
     let payments = [];
     for (const id in runningAmounts) {
       let dest = runningAmounts[id];
