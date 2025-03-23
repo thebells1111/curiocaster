@@ -1,9 +1,12 @@
 <script>
   import sha256 from "crypto-js/sha256";
   import { v4 as uuidv4 } from "uuid";
-  import parseSRT from "parse-srt";
   import PlayingImg from "$lib/Shared/NowPlaying/PlayingImg.svelte";
+
+  import sortChapters from "$functions/sortChapters";
+  import getTranscript from "$functions/getTranscript";
   import getChapters from "$functions/getChapters";
+
 
   import Hls from "hls.js";
 
@@ -104,26 +107,6 @@
   } else {
     $playingEpisodeChapters = undefined;
   }
-
-  async function getTranscript(transcriptSRT) {
-    if (browser) {
-      let res = await fetch(`/api/httpsproxy?url=` + transcriptSRT.url);
-      if (res.status === 200) {
-        let text = await res.text();
-        let transcript = parseSRT(text);
-        let t = transcript
-          .map((v) => v.text)
-          .join(" ")
-          .replace(/(<|&lt;)br\s*\/*(>|&gt;)/g, " ");
-
-        transcript.full = t.split("|-|").join(" ");
-        $playingEpisodeTranscript = transcript;
-        if ($playingEpisode.title === $playingEpisode.title) {
-          $playingEpisodeTranscript = transcript;
-        }
-      } else {
-        $playingEpisodeTranscript = null;
-      }
     }
   }
 
@@ -134,21 +117,11 @@
     $playingPodcast?.image ||
     "";
 
-  $: if ($playingEpisode && $playingEpisode.transcripts) {
-    const transcriptSRT = $playingEpisode.transcripts?.find(
-      ({ type }) =>
-        type === "application/srt" ||
-        type === "text/srt" ||
-        type === "application/x-subrip"
-    );
-
-    if (transcriptSRT?.url) {
-      getTranscript(transcriptSRT);
-    } else {
-      $playingEpisodeTranscript = null;
-    }
-  } else {
+  $: if ($playingEpisode && $playingEpisode.transcripts && browser) {
     $playingEpisodeTranscript = null;
+    getTranscript($playingEpisode.transcripts).then(transcript => {
+      $playingEpisodeTranscript = transcript;
+    })
   }
 
   let playerTimeout;

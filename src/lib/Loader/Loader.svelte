@@ -1,10 +1,11 @@
 <script>
-  import parseSRT from "parse-srt";
   import clone from "just-clone";
 
   import getPodcastList from "$functions/getPodcastList";
   import startEpisodeUpdates from "./startEpisodeUpdates";
   import sortEpisodes from "$functions/sortEpisodes";
+  import sortChapters from "$functions/sortChapters";
+  import getTranscript from '$functions/getTranscript';
   import getChapters from '$functions/getChapters';
 
   import getRSS from "$functions/getRSSFeed";
@@ -249,31 +250,7 @@
         $playingEpisodeChapters = await getChapters($playingEpisode?.chaptersUrl);
       }
 
-      const transcriptSRT = $playingEpisode.transcripts?.find(
-        ({ type }) =>
-          type === "application/srt" ||
-          type === "text/srt" ||
-          type === "application/x-subrip"
-      );
-
-      if (transcriptSRT?.url) {
-        let res = await fetch(`/api/httpsproxy?url=` + transcriptSRT.url);
-        if (res.status === 200) {
-          let text = await res.text();
-          let transcript = parseSRT(text);
-          let t = transcript
-            .map((v) => v.text)
-            .join(" ")
-            .replace(/(<|&lt;)br\s*\/*(>|&gt;)/g, " ");
-
-          transcript.full = t.split("|-|").join(" ");
-          $playingEpisodeTranscript = transcript;
-        } else {
-          $playingEpisodeTranscript = null;
-        }
-      } else {
-        $playingEpisodeTranscript = null;
-      }
+      $playingEpisodeTranscript = await getTranscript($playingEpisode?.transcripts);
 
       resolve();
     });
