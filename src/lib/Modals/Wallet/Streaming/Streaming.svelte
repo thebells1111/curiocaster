@@ -1,5 +1,5 @@
 <script>
-  import { onDestroy } from 'svelte';
+  import { onDestroy } from "svelte";
 
   import boostSats from "$functions/boostSats";
   import dollarsToSats from "$functions/dollarsToSats";
@@ -145,7 +145,7 @@
   function showValueBlockLog() {
     console.log(" ");
     console.log(
-      `${$playingPodcast.title} Value Block: `,
+      `${$playingPodcast?.title} Value Block: `,
       $walletValueBlock ? $walletValueBlock.destinations : "none"
     );
   }
