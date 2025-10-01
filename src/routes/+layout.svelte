@@ -154,7 +154,7 @@
   console.log(route);
 </script>
 
-Fixing stuff. Sorry.
+<h1>Fixing stuff. Sorry.</h1>
 
 <!-- {#if route !== "/player"}
   <slot />
