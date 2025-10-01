@@ -154,7 +154,9 @@
   console.log(route);
 </script>
 
-{#if route !== "/player"}
+Fixing stuff. Sorry.
+
+<!-- {#if route !== "/player"}
   <slot />
   <Loader />
 
@@ -182,7 +184,7 @@
   <div>
     <slot />
   </div>
-{/if}
+{/if} -->
 
 <style>
   main {
