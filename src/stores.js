@@ -96,7 +96,6 @@ export const isPlayerLoaded = writable(false);
 export const userStateLoaded = writable(false);
 export const nowPlayingLoaded = writable(false);
 export const loadingStatus = writable("");
-export const imageProxy = `/api/getimage?url=`;
 export const posterUrl = writable(null);
 export const podcastListPane = writable("search");
 export const middlePane = writable("episodesList");
