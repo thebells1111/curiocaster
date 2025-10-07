@@ -1,45 +1,42 @@
 <script>
-  export let data;
-  let podcast = data.podcast;
-  let episode = data.episode;
+  import { page } from "$app/stores";
 
-  import { initialPodcast, initialEpisode, currentDesktopView } from "$/stores";
+  import { initialPodcast, initialEpisode, currentDesktopView, remoteServer } from "$/stores";
+  import getRSSEditorFeed from "$functions/getRSSFeed.js";
+  import { onMount } from "svelte";
 
-  $initialPodcast = podcast || undefined;
-  $initialEpisode = episode || undefined;
+  import { fetchPodcast, fetchEpisode } from "$functions/fetchFromIndex";
 
   $: if ($initialEpisode) {
     $currentDesktopView = "nowPlaying";
   }
+
+  async function fetchData(podcastId, episodeId) {
+    try {
+      if (Number(episodeId)) {
+        return await Promise.all([
+          fetchPodcast(podcastId),
+          fetchEpisode(episodeId),
+        ]);
+      } else if (episodeId === "live") {
+        const podcast = await fetchPodcast(podcastId);
+        const feed = await getRSSEditorFeed(podcast.url);
+        return [podcast, feed.live?.[0]];
+      }
+    } catch (err) {
+      console.error('Error fetching data:', err);
+    }
+
+    return null;
+  }
+
+  onMount(async () => {
+    const [podcast, episode] = await fetchData(
+      $page.params.podcastid,
+      $page.params.episodeid
+    );
+
+    initialPodcast.set(podcast);
+    initialEpisode.set(episode);
+  });
 </script>
-
-<svelte:head>
-  {#if episode}
-    <meta
-      name="description"
-      content={`CurioCaster - ${podcast.title} - ${episode.title}`}
-    />
-    <meta property="og:site_name" content="CurioCaster" />
-    <meta property="og:title" content={`${podcast.title} - ${episode.title}`} />
-    <meta property="og:description" content="Listen on CurioCaster" />
-    <meta property="og:image" content={podcast.artwork || podcast.image} />
-    <meta property="twitter:card" content="player" />
-    <meta
-      property="og:url"
-      content={`https://curiocaster.com/podcast/pi${podcast.id}/${episode.id}`}
-    />
-
-    <meta
-      property="twitter:player"
-      content={`https://curiocaster.com/player/?podcast=${podcast.id}&episode=${episode.id}`}
-    />
-    <meta property="twitter:player:width" content="320" />
-    <meta property="twitter:player:height" content="320" />
-    <meta
-      property="twitter:title"
-      content={`${podcast.title} - ${episode.title}`}
-    />
-    <meta property="twitter:site" content="@CurioCaster" />
-    <meta property="twitter:image" content={podcast.artwork || podcast.image} />
-  {/if}
-</svelte:head>
