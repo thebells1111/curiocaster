@@ -1,4 +1,5 @@
 import sortChapters from "./sortChapters";
+import { remoteServer } from '$/stores';
 
 export default async function getChapters(url) {
   if (!url) {
@@ -7,7 +8,7 @@ export default async function getChapters(url) {
 
   try {
     const res = await fetch(
-      `/api/httpsproxy?url=` +
+      remoteServer + `api/proxy?url=` +
         encodeURIComponent(url)
     );
     const chapters = await res.json();

@@ -1,4 +1,5 @@
 import { parse } from '@plussub/srt-vtt-parser';
+import { remoteServer } from '$/stores';
 
 export default async function getTranscript(transcripts) {
 
@@ -15,7 +16,7 @@ export default async function getTranscript(transcripts) {
   }
 
   try {
-    const res = await fetch(`/api/httpsproxy?url=` + transcriptFile.url);
+    const res = await fetch(remoteServer + `api/proxy?url=` + encodeURIComponent(transcriptFile.url));
 
     if (res.status !== 200) {
       console.error(`Failed to load transcript: ${res.status}`);
