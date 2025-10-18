@@ -27,7 +27,7 @@ export default async function refreshAlbyToken() {
     const data = await response.text();
     try {
       const user = JSON.parse(data);
-      if (user.balance !== undefined) {
+      if (user.balance !== undefined && user.balance !== null) {
         satBalance.set(user.balance);
         lastAlbyRefreshTime.set(currentTime);
         return true;
