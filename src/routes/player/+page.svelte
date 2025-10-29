@@ -6,12 +6,15 @@
   import sortChapters from "$functions/sortChapters";
   import getTranscript from "$functions/getTranscript";
   import getChapters from "$functions/getChapters";
+  import { fetchPodcast } from "$functions/fetchFromIndex";
 
   import Hls from "hls.js";
 
   import ControlsOverlay from "$lib/Shared/NowPlaying/ControlsOverlay.svelte";
 
   import { browser } from "$app/environment";
+  import { page } from "$app/stores";
+  import { onMount } from "svelte";
 
   import {
     playingPodcast,
@@ -36,12 +39,6 @@
     useDefaultChapter,
   } from "$/stores";
 
-  export let data;
-  let podcast = data.podcast;
-  let episode = data.episode;
-  $playingPodcast = podcast;
-  $playingEpisode = episode;
-  $initialEpisode = episode;
   $showMobile = true;
   let imageWidth;
   let isM3U8 = false;
@@ -65,6 +62,26 @@
   let showOverlay = true;
 
   let fadeTimeout;
+
+  onMount(async () => {
+    let podcastId = $page.url.searchParams.get("podcast");
+    let episodeId = $page.url.searchParams.get("episode");
+
+    if (Number(episodeId) && Number(podcastId)) {
+      console.log("cool");
+
+      let podcast = await fetchPodcast(podcastId);
+      if (!podcast) return;
+
+      const episode = podcast.episodes.find(
+        ({ id }) => Number(id) === Number(episodeId)
+      );
+
+      $playingPodcast = podcast;
+      $playingEpisode = episode;
+      $initialEpisode = episode;
+    }
+  });
 
   function handleMouseMove() {
     showOverlay = true;
