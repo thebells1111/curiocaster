@@ -29,7 +29,11 @@ export default function getWalletValueBlock(
     walletBlock.feedGuid = feedGuid;
     walletBlock.itemGuid = itemGuid;
 
-    walletValueBlock.set(walletBlock);
+    const currentBlock = get(walletValueBlock);
+
+    if (!currentBlock || JSON.stringify(currentBlock) !== JSON.stringify(walletBlock)) {
+      walletValueBlock.set(walletBlock);
+    }
   }
 }
 
