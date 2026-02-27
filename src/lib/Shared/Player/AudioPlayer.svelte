@@ -166,10 +166,17 @@
 
   function startListening(url) {
     console.log("url: ", url);
+
+    // Disconnect existing connection if it exists
+    if ($liveItemSocket && !$liveItemSocket.disconnected) {
+      $liveItemSocket.disconnect();
+    }
+
     $liveItemSocket = undefined;
     $remoteLiveSplits = undefined;
-    // Only create new connection if there isn't already one
-    if (browser && (!$liveItemSocket || $liveItemSocket.disconnected) && url) {
+
+    // Create new connection
+    if (browser && url) {
       $liveItemSocket = io.connect(url);
       $liveItemSocket.on("remoteValue", function (data) {
         $remoteLiveSplits = data;
