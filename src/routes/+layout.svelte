@@ -9,7 +9,6 @@
   import Preferences from "$lib/Modals/Preferences/Preferences.svelte";
   import PendingEpisodes from "$lib/Modals/PendingEpisodes/PendingEpisodesModal.svelte";
   import { onMount } from "svelte";
-  import { page } from "$app/stores";
 
   import {
     showMobile,
@@ -111,10 +110,9 @@
       $deviceType = getType();
       console.log($deviceType);
 
-      navigator.serviceWorker &&
-        navigator.serviceWorker
-          .register("/serviceworker.js")
-          .then(function (registration) {});
+      if (!navigator.serviceWorker.controller) {
+        navigator.serviceWorker.register("/serviceworker.js");
+      }
     };
 
     const widthListener = window.matchMedia(
@@ -149,39 +147,29 @@
     }
     return "desktop";
   }
-
-  $: route = $page.route.id;
-  console.log(route);
 </script>
 
-{#if route !== "/player"}
-  <slot />
-  <Loader />
+<Loader />
 
-  <main class:show={mounted}>
-    {#if $showMobile}
-      <MobileViewer />
-    {:else}
-      <DesktopViewer />
-    {/if}
-  </main>
-
-  <Disclaimer />
-
-  <Wallet />
-
-  <ShareClip />
-  <OPML />
-
-  <Preferences />
-
-  {#if $showPending}
-    <PendingEpisodes />
+<main class:show={mounted}>
+  {#if $showMobile}
+    <MobileViewer />
+  {:else}
+    <DesktopViewer />
   {/if}
-{:else}
-  <div>
-    <slot />
-  </div>
+</main>
+
+<Disclaimer />
+
+<Wallet />
+
+<ShareClip />
+<OPML />
+
+<Preferences />
+
+{#if $showPending}
+  <PendingEpisodes />
 {/if}
 
 <style>

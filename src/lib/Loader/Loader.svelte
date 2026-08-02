@@ -1,12 +1,12 @@
 <script>
+  import { page } from "$app/stores";
   import clone from "just-clone";
 
   import getPodcastList from "$functions/getPodcastList";
   import startEpisodeUpdates from "./startEpisodeUpdates";
   import sortEpisodes from "$functions/sortEpisodes";
-  import sortChapters from "$functions/sortChapters";
-  import getTranscript from '$functions/getTranscript';
-  import getChapters from '$functions/getChapters';
+  import getTranscript from "$functions/getTranscript";
+  import getChapters from "$functions/getChapters";
 
   import getRSS from "$functions/getRSSFeed";
 
@@ -68,9 +68,8 @@
     remoteLiveSplits,
     playingSplitbox,
     splitbox,
+    listSwiper,
   } from "$/stores";
-
-  import { browser } from "$app/environment";
 
   function proxyUrl(url) {
     if (url) {
@@ -89,11 +88,10 @@
     proxyUrl($playingPodcast?.artwork) ||
     proxyUrl($playingPodcast?.image) ||
     "";
+  console.log($page);
+  getPodcasts();
+  // getNotifications();
 
-  if (browser) {
-    getPodcasts();
-    // getNotifications();
-  }
   async function getPodcasts() {
     try {
       // backupDB();
@@ -247,10 +245,14 @@
       $playerDuration = $userState.playing.episodeState?.duration || 0;
 
       if ($playingEpisode?.chaptersUrl) {
-        $playingEpisodeChapters = await getChapters($playingEpisode?.chaptersUrl);
+        $playingEpisodeChapters = await getChapters(
+          $playingEpisode?.chaptersUrl
+        );
       }
 
-      $playingEpisodeTranscript = await getTranscript($playingEpisode?.transcripts);
+      $playingEpisodeTranscript = await getTranscript(
+        $playingEpisode?.transcripts
+      );
 
       resolve();
     });
@@ -270,33 +272,55 @@
   }
 
   async function loadEpisodesList() {
-    let podcastId = $initialPodcast?.id || $userState.playing.podcast?.id;
+    console.log();
+    console.log($page.params.podcastid);
+    let initialPodcast = null;
+    let useGuid = false;
+    if ($page.params.podcastid.includes("pi")) {
+      initialPodcast = $page.params.podcastid.slice(2);
+    } else if (Number($page.params.podcastid)) {
+      initialPodcast = $page.params.podcastid;
+    } else if ($page.params.podcastid.length === 36) {
+      initialPodcast = $page.params.podcastid;
+      useGuid = true;
+    }
+    let podcastId = initialPodcast || $userState.playing.podcast?.id;
 
     if (podcastId) {
-      if (!$initialPodcast && podcastId) {
-        let urls = [
+      let urls = [];
+      if (!useGuid) {
+        urls = [
           `${remoteServer}api/queryindex?q=podcasts/byfeedid?id=` + podcastId,
           `${remoteServer}api/queryindex?q=episodes/byfeedid?` +
             encodeURIComponent(`id=${podcastId}&max=1000`),
         ];
-        await Promise.all(
-          urls.map((url) => fetch(url).then((response) => response.json()))
-        ).then((data) => {
-          if (data[0].status) {
-            let feed = data[0].feed;
-            feed.episodes = data[1].items;
-            $initialPodcast = feed;
-          }
-        });
+      } else {
+        urls = [
+          `${remoteServer}api/queryindex?q=podcasts/byguid?guid=` + podcastId,
+          `${remoteServer}api/queryindex?q=episodes/bypodcastguid?` +
+            encodeURIComponent(`guid=${podcastId}&max=1000`),
+        ];
+      }
+      await Promise.all(
+        urls.map((url) => fetch(url).then((response) => response.json()))
+      ).then((data) => {
+        if (data[0].status) {
+          let feed = data[0].feed;
+          feed.episodes = data[1].items;
+          $selectedPodcast = feed;
+        }
+      });
+
+      if (initialPodcast && $listSwiper) {
+        $listSwiper.slideTo(1);
       }
 
-      getRSS($initialPodcast.url);
+      getRSS($selectedPodcast.url);
 
       $playingSplitbox = clone($splitbox);
       console.log($splitbox);
       console.log($playingSplitbox);
 
-      $selectedPodcast = $initialPodcast;
       $episodesList = $selectedPodcast.episodes;
 
       if ($initialEpisode) {

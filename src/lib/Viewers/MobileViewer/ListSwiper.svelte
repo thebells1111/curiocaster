@@ -2,7 +2,6 @@
   import { onMount } from "svelte";
   import {
     listSwiper,
-    initialPodcast,
     pendingEpisodesWallet,
     pendingEpisodeData,
   } from "$/stores";
@@ -32,9 +31,6 @@
         $pendingEpisodeData = null;
       }
     });
-    if ($initialPodcast) {
-      $listSwiper.slideTo(1);
-    }
   });
 </script>
 
